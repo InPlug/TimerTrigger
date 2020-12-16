@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Reflection;
@@ -20,6 +18,7 @@ namespace TimerTrigger
     /// Autor: Erik Nagel
     ///
     /// 19.07.2013 Erik Nagel: erstellt
+    /// 15.12.2020 Erik Nagel: Warte-Durchlauf bei Übergabe von "UserRun" als letztem Parameter implementiert.
     /// </remarks>
     public class TimerTrigger : INodeTrigger
     {
@@ -65,13 +64,15 @@ namespace TimerTrigger
         /// <returns>True, wenn der Trigger durch diesen Aufruf tatsächlich gestartet wurde.</returns>
         public bool Start(object triggerController, object triggerParameters, Action<TreeEvent> triggerIt)
         {
-            //TimeSpan firstRun, TimeSpan interval
+            // TimeSpan firstRun, TimeSpan interval
+            bool isUserRun = triggerParameters.ToString().EndsWith("|UserRun");
+
             string firstArg = (triggerParameters.ToString() + "|").Split('|')[0];
             string secondArg = "";
             if (!firstArg.Equals(""))
             {
                 secondArg = (triggerParameters.ToString() + "|").Split('|')[1];
-                if (secondArg.Equals(""))
+                if (secondArg.Equals("") || secondArg.Equals("UserRun"))
                 {
                     secondArg = firstArg;
                     firstArg = "S:0"; // 0 Sekunden bis zum ersten Trigger-Event
@@ -80,6 +81,10 @@ namespace TimerTrigger
             else
             {
                 this.syntax("Es muss zumindest eine Zeitangabe erfolgen.");
+            }
+            if (isUserRun)
+            {
+                firstArg = secondArg; // erstmal einen Duschlauf warten, da der Knoten durch UserRun schon direkt gestartet wurde.
             }
             string firstUnity = (firstArg + ":").Split(':')[0].ToUpper();
             if (!(new string[] { "MS", "S", "M", "H", "D" }).Contains(firstUnity))
