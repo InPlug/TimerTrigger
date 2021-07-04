@@ -120,6 +120,11 @@ namespace TimerTrigger
             {
                 this.ThrowSyntaxException("Es muss zumindest eine Zeitangabe erfolgen.");
             }
+            if (String.IsNullOrEmpty(secondArg))
+            {
+                secondArg = firstArg;
+                firstArg = "S:0"; // 0 Sekunden bis zum ersten Trigger-Event
+            }
             if (this._isUserRun)
             {
                 firstArg = secondArg; // erstmal einen Durchlauf warten, da der Knoten durch UserRun schon direkt gestartet wurde.
