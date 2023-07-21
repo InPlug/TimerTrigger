@@ -1,10 +1,8 @@
-﻿using System;
-using System.IO;
-using Vishnu.Interchange;
+﻿using Vishnu.Interchange;
 
 namespace TimerTriggerDemo
 {
-    class Program
+    internal class Program
     {
         public static void Main(string[] args)
         {

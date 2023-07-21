@@ -35,7 +35,7 @@ namespace TimerTrigger
         /// Einheiten sind: "MS" Millisekunden, "S" Sekunden, "M" Minuten, "H" Stunden und "D" Tage.</param>
         /// <param name="triggerIt">Die aufzurufende Callback-Routine, wenn der Trigger feuert.</param>
         /// <returns>True, wenn der Trigger durch diesen Aufruf tatsächlich gestartet wurde.</returns>
-        public override bool Start(object triggerController, object triggerParameters, Action<TreeEvent> triggerIt)
+        public override bool Start(object? triggerController, object? triggerParameters, Action<TreeEvent> triggerIt)
         {
             base.Start(triggerController, triggerParameters, triggerIt);
 
@@ -60,7 +60,7 @@ namespace TimerTrigger
         /// </summary>
         /// <param name="triggerController">Das Objekt, das den Trigger definiert.</param>
         /// <param name="triggerIt">Die aufzurufende Callback-Routine, wenn der Trigger feuert.</param>
-        public override void Stop(object triggerController, Action<TreeEvent> triggerIt)
+        public override void Stop(object? triggerController, Action<TreeEvent> triggerIt)
         {
             if (this._nodeCancellationTokenSource != null)
             {
@@ -103,18 +103,18 @@ namespace TimerTrigger
         /// </summary>
         /// <param name="triggerParameters">Die von Vishnu weitergeleiteten Parameter aus der JobDescription.xml.</param>
         /// <param name="triggerController">Der Knoten, dem dieser Trigger zugeordnet ist.</param>
-        protected override void EvaluateParametersOrFail(ref object triggerParameters, object triggerController)
+        protected override void EvaluateParametersOrFail(ref object? triggerParameters, object? triggerController)
         {
             base.EvaluateParametersOrFail(ref triggerParameters, triggerController);
 
             // Ab hier folgt die Trigger-spezifische Prüfung und Übernahme der von Ihnen über die JobDescription.xml
             // übergebenen Parameter. In %-Zeichen eingeschlossene Zeichenketten wurden ggf. von der
             // Vishnu-Parameterersetzung durch ihre aktuellen Laufzeitwerte ersetzt.
-            string firstArg = (triggerParameters.ToString() + "|").Split('|')[0];
+            string firstArg = (triggerParameters?.ToString() + "|").Split('|')[0];
             string secondArg = "";
             if (!firstArg.Equals(""))
             {
-                secondArg = (triggerParameters.ToString() + "|").Split('|')[1];
+                secondArg = (triggerParameters?.ToString() + "|").Split('|')[1];
             }
             else
             {
@@ -176,8 +176,8 @@ namespace TimerTrigger
 
         #region private members
 
-        private IObservable<long> _timerTask;
-        private CancellationTokenSource _nodeCancellationTokenSource { get; set; }
+        private IObservable<long>? _timerTask;
+        private CancellationTokenSource? _nodeCancellationTokenSource { get; set; }
         private CancellationToken _cancellationToken;
 
         /// <summary>
