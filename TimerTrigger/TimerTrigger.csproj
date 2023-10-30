@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -12,8 +12,8 @@
     <Description>$(AssemblyName) - Vishnu-Plugin: löst in konfigurierbaren Zeitabständen Events aus.</Description>
     <Copyright>Copyright © $(Authors) 2013-2023</Copyright>
     <PackageTags>NetEti Vishnu Plugin Timer Trigger Event</PackageTags>
-    <AssemblyVersion>7.0.1.1</AssemblyVersion>
-    <FileVersion>7.0.1.1</FileVersion>
+    <AssemblyVersion>8.0.0.0</AssemblyVersion>
+    <FileVersion>8.0.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup>

@@ -182,13 +182,13 @@ namespace TimerTrigger
 
         /// <summary>
         /// Definierter Zeitpunkt für den ersten Start
-        /// des zugeorneten INodeWorker oder null.
+        /// des zugeordneten INodeWorker oder null.
         /// </summary>
         private TimeSpan _firstRun { get; set; }
 
         /// <summary>
         /// Intervall für den wiederholten Start (Run)
-        /// der zugeorneten INodeWorker oder null.
+        /// der zugeordneten INodeWorker oder null.
         /// </summary>
         private TimeSpan _interval { get; set; }
 
